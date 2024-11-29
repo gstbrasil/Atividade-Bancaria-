@@ -1,0 +1,34 @@
+def nova_conta():
+    global usuarios
+    global nc
+    
+    while True:
+        vincular = input("Qual o usuário que deseja vincular essa conta? ").lower().strip()
+        
+        # Verificar se o nome do usuário está na lista de usuários cadastrados
+        usuario_encontrado = None
+        for usuario in usuarios:
+            if usuario["Nome"] == vincular:
+                usuario_encontrado = usuario
+                break
+        
+        if usuario_encontrado:
+            print(f"Conta vinculada ao usuário {vincular} com sucesso.")
+            conta_corrente = {
+                "agencia": "0001",
+                "numero": nc,
+                "usuário": vincular
+            }
+            conta.append(conta_corrente)
+            nc += 1
+        else:
+            print("Usuário inexistente.")
+            break
+        
+        confirmacao = str(input("Deseja fazer outro cadastro de conta? (sim/não): ")).strip().lower()
+        if confirmacao == "sim":
+            continue
+        elif confirmacao == "não" or confirmacao == "nao":
+            break
+        else:
+            print("Por favor, digite apenas 'sim' ou 'não'.")

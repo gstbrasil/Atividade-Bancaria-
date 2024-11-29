@@ -1,0 +1,54 @@
+from datetime import datetime
+usuarios = []
+
+def novo_usuario():
+    while True:
+        nome = str(input("Insira o nome do usuário: "))
+        data_de_nascimento = input("Qual a data de nascimento do usuaario: (dd/mm/AAAA) ==> ")
+        
+        try:
+            data_formatada = datetime.strptime(data_de_nascimento, "%d/%m/%Y")
+            print(f"Data de nascimento é {data_formatada.strftime('%d/%m/%Y')}")
+        except ValueError:
+            print("Data esta inserida de forma equivocada, tente novamente.")
+            continue
+        
+        cpf = input("Digite o CPF do usuario: ")
+        
+        if len(cpf) == 11 and cpf.isdigit():
+            if cpf not in [usuario["CPF"] for usuario in usuarios]:
+                print("CPF valido")
+            else:
+                print("CPF ja existente")
+                return
+        else:
+            print("CPF invalido")
+            continue
+        
+        print("Informe os dados a seguir sobre seu endereço:")
+        logradouro = str(input("Logradouro: "))
+        nro = int(input("Numero: "))
+        bairro = str(input("Bairro: "))
+        cid_est = str(input("Cidade e sigla do estado: "))
+        
+        
+        usuario = {
+            "Nome": nome,
+            "Data de Nascimento": data_formatada,
+            "CPF": cpf,
+            "Logradouro": logradouro,
+            "Numero": nro,
+            "bairro": bairro,
+            "Cidade e Estado": cid_est
+            
+        }
+        
+        usuarios.append(usuario)
+        print(f"Usuario {nome} cadastrado com sucesso")
+        
+        confirmacao = str(input("Deseja fazer outro cadastro? "))
+        if confirmacao != "sim":
+            break
+
+
+novo_usuario()

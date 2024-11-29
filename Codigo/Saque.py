@@ -2,7 +2,9 @@ def saque():
     global saldo
     global numero_saques
     global total_saques
-    global historico_transacoes
+    global limite_transacoes
+    global total_transacoes
+    
     
     while True:
         try:
@@ -13,11 +15,13 @@ def saque():
                 print("Seu limite de saques diarios esgotou")
             elif valor < 0:
                 print("digite um valor valido")
+            elif limite_transacoes > total_transacoes:
+                print("Voce excedeu o numero de transações permitidas para hoje")
             elif valor > 500:
                 print("Voce estrapolou o limite de valor por saque, o maximo é R$500")
             else:
                 saldo -= valor
-                historico_transacoes.append(f"Saque: R${valor:.2f}")
+                historico_transacoes.append(f"Saque: R${valor:.2f} feito no data de {datetime.datetime.now(pytz.timezone('America/Sao_Paulo')).strftime('%d/%m/%Y %H:%M')}")
                 numero_saques += 1
         except ValueError:
             print("Digite um valor numerico valido.")

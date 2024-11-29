@@ -1,0 +1,28 @@
+def Conta_corrente():
+    global usuarios
+    global nc
+    
+    while True:
+        vincular = str(input("Qual o usuario que deseja vincular essa conta? ")).lower().strip()
+        
+        if vincular in usuarios:
+            print("Conta vinculada com sucesso")
+        else:
+            print("Usuario inexistente")
+            continue
+        
+        Conta_corrente = {
+            "agencia": "0001",
+            "numero": nc,
+            "usuário": vincular
+        }
+        nc += 1
+        
+        confirmacao = str(input("Deseja fazer outro cadastro? ")).strip
+        while True:
+            if confirmacao == "sim":
+                return
+            elif confirmacao == "nao" or confirmacao == "não":
+                break
+            else:
+                print("Por favor, digite apenas sim ou não")
